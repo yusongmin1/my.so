@@ -28,7 +28,7 @@ install(DIRECTORY include/
   DESTINATION include
 )#把include文件夹复制到install目录
 
-# Install library
+# Install library 必须有，不可删除
 install(TARGETS mylib
   EXPORT export_mylib
   LIBRARY DESTINATION lib
@@ -36,7 +36,7 @@ install(TARGETS mylib
   RUNTIME DESTINATION bin
 )
 
-# # Export CMake configuration
+# # Export CMake configuration 必须有，不可删除
 ament_export_include_directories(include)
 ament_export_libraries(mylib)
 
