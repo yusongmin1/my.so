@@ -11,27 +11,33 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 
-add_library(myclass SHARED src/myclass.cpp)#生成.so文件
-# add_executable(myclass src/myclass.cpp)
-target_include_directories(myclass PUBLIC
+add_library(mylib SHARED src/myclass.cpp)#生成.so文件
+# add_executable(mylib src/mylib.cpp)
+target_include_directories(mylib PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)#包含include目录
-target_compile_features(myclass PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(mylib PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 ament_target_dependencies(
-  myclass
+  mylib
   "rclcpp"
   "rclpy"
   "std_msgs"
 )
+
 install(DIRECTORY include/
   DESTINATION include
 )#把include文件夹复制到install目录
 
-install(TARGETS myclass
-  DESTINATION lib)#把.so文件安装到安装目录
+# Install library 必须有，不可删除
+install(TARGETS mylib
+  EXPORT export_mylib
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
-# # Export CMake configuration
-# ament_export_include_directories(include)
-# ament_export_libraries(myclass)
+# # Export CMake configuration 必须有，不可删除
+ament_export_include_directories(include)
+ament_export_libraries(mylib)
 
 ament_package()
