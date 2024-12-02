@@ -22,9 +22,9 @@ ament_target_dependencies(
   mylib#包含生成的库文件
 )#不可或缺添加
 
-install(DIRECTORY include/
-  DESTINATION include
-)#把include文件夹复制到install目录
+# install(DIRECTORY include/
+#   DESTINATION include
+# )#把include文件夹复制到install目录
 
 
 install(TARGETS mycpp
