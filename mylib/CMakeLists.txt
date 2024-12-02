@@ -28,7 +28,7 @@ install(DIRECTORY include/
 )#把include文件夹复制到install目录
 
 install(TARGETS myclass
-  DESTINATION lib)
+  DESTINATION lib)#把.so文件安装到安装目录
 
 # # Export CMake configuration
 # ament_export_include_directories(include)
